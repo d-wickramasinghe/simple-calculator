@@ -20,6 +20,11 @@
   justify-content: flex-end;
 }
 
+.display--error .display-value {
+  color: #d96c5a;
+  font-size: clamp(20px, 6vw, 26px);
+}
+
 .display-value {
   font-size: clamp(28px, 8vw, 38px);
   font-weight: 600;
@@ -45,10 +50,31 @@
   font-weight: 600;
   cursor: pointer;
 }
+.key:active {
+  transform: scale(0.96);
+}
 
-.key--spacer {
-  background: transparent;
-  cursor: default;
+.key--fn {
+  background: #3e5c55;
+  color: #efede4;
+}
+
+.key--op {
+  background: #c97a3d;
+  color: #fbf4ec;
+}
+
+.key--eq {
+  background: #b5502e;
+  color: #fbf4ec;
+}
+
+.key--zero {
+  grid-column: span 2;
+  justify-content: flex-start;
+  padding-left: 24px;
+  display: flex;
+  align-items: center;
 }
 
 @media (max-width: 380px) {
