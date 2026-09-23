@@ -4,7 +4,7 @@ A responsive calculator built with React + JavaScript. Supports full expression
 evaluation with correct operator precedence, brackets, percentages, decimals,
 negative numbers, calculation history, and input validation.
 
-**Live demo:** see the link shared alongside this project.
+**Live demo: https://simple-calculator-six-indol.vercel.app/**  see the link shared alongside this project.
 
 ## Features
 
@@ -70,12 +70,12 @@ tested manually across desktop and mobile viewport widths.
 
 ## Screenshots
 
-Add screenshots of the running app here after deploying, e.g.:
+docs/screenshot-desktop.png
+docs/screenshot-calculation.png
+docs/screenshot-history.png
+docs/screenshot-error.png
+docs/screenshot-mobile.png
 
-```
-![Calculator - desktop](docs/screenshot-desktop.png)
-![Calculator - mobile](docs/screenshot-mobile.png)
-```
 
 ## Development log
 
