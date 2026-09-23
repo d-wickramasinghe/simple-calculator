@@ -1,51 +1,86 @@
 # Simple Calculator
 
-A responsive calculator built with React + TypeScript, developed as part of a
-5-day internship task.
+A responsive calculator built with React + JavaScript. Supports full expression
+evaluation with correct operator precedence, brackets, percentages, decimals,
+negative numbers, calculation history, and input validation.
 
-## Progress
+**Live demo:** see the link shared alongside this project.
 
-- [x] Day 1 — Project setup & basic calculator UI
-- [x] Day 2 — Core calculation functionality
-- [ ] Day 3
-- [ ] Day 4
-- [ ] Day 5
+## Features
 
-## Day 1 — Project Setup & Basic Calculator UI
+- **Basic operations** — addition, subtraction, multiplication, division
+- **Decimals and negative numbers** — e.g. `-3.5 * 2`
+- **Percentage** — `50%` → `0.5`, and calculator-style relative percentage:
+  `200 + 10%` → `220`
+- **Brackets and precedence** — `(2 + 3) * 4` → `20`, with implicit
+  multiplication like `2(3 + 4)` → `14`
+- **Clear (`C`) and backspace (`⌫`)**
+- **Calculation history** — every evaluated expression and result is listed,
+  tap an entry to reuse its result, and history can be cleared
+- **Input validation & error handling** — division by zero, unmatched
+  brackets, and malformed expressions show a clear inline error instead of
+  crashing
+- **Keyboard support** — number keys, operators, `Enter`/`=` to evaluate,
+  `Backspace`, and `Escape` to clear
+- **Responsive UI** — works on mobile and desktop screen sizes
 
-- React + TypeScript project scaffolded with Vite.
-- `Calculator` component created with display and button-grid structure.
-- Number, operator, clear, backspace, decimal and equals buttons laid out.
-- Responsive layout (works down to small phone widths).
+## Project structure
 
-## Day 2 — Core Calculation Functionality
+```
+calculator/
+├── public/
+│   └── index.html
+├── src/
+│   ├── components/
+│   │   ├── Calculator.jsx      # UI: keypad, display, history panel
+│   │   └── Calculator.css
+│   ├── utils/
+│   │   └── calculatorEngine.js # tokenizer + recursive-descent parser
+│   ├── App.jsx
+│   └── index.js
+├── package.json
+└── README.md
+```
 
-- Added `useCalculator` hook (`src/hooks/useCalculator.ts`) holding all
-  calculator state and logic.
-- Implemented addition, subtraction, multiplication and division.
-- Wired every button to real input handling (numbers, operators, `=`).
-- Decimal input (one `.` per number) and negative numbers (`±` toggles sign).
-- `C` clears the calculator; `⌫` deletes the last digit.
-- Basic safety net: dividing by zero (or any non-finite result) shows
-  `Error` on the display instead of crashing or showing `Infinity`.
+## How the engine works
 
-Note: this is a simple sequential calculator (operand → operator → operand →
-`=`), not a full expression parser — operator precedence and bracket support
-are scoped for a later day.
+`src/utils/calculatorEngine.js` tokenizes the input string and evaluates it
+with a small recursive-descent parser (`expr → term → factor → primary`),
+which gives correct `*`/`/` vs `+`/`-` precedence and full bracket support
+without relying on `eval()`. Division by zero, unmatched brackets, and
+malformed input throw a `CalcError` with a short user-facing message that the
+UI displays inline under the display.
 
-## Run it
+## Getting started
 
 ```bash
 npm install
-npm run dev
+npm start       # runs the app at http://localhost:3000
+npm run build   # production build in /build
 ```
 
-Then open the local URL Vite prints (usually `http://localhost:5173`).
+## Testing
+
+The engine was verified against a set of expression/result pairs covering
+precedence, brackets, implicit multiplication, negatives, percentages
+(including the relative "200+10%" case), and error conditions (division by
+zero, unmatched brackets, incomplete expressions, invalid characters). All UI
+interactions (typing, clear, backspace, equals, history, keyboard input) were
+tested manually across desktop and mobile viewport widths.
 
 ## Screenshots
 
-_Add screenshots here after running `npm run dev` locally, e.g.:_
+Add screenshots of the running app here after deploying, e.g.:
 
 ```
-screenshots/day1-ui.png
+![Calculator - desktop](docs/screenshot-desktop.png)
+![Calculator - mobile](docs/screenshot-mobile.png)
 ```
+
+## Development log
+
+- **Day 01–02:** Project setup, calculator UI, and core operations
+  (+ − × ÷), decimals, negatives, clear/backspace.
+- **Day 03:** Bracket support, operator precedence, percentage handling,
+  calculation history, input validation and error handling, responsive
+  polish, and deployment.
